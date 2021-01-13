@@ -4,10 +4,11 @@ import com.example.demo.model.entities.Friend;
 import com.example.demo.model.repositories.FriendRepository;
 import com.example.demo.model.services.interface_services.FriendService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class FriendServiceImpl implements FriendService {
     @Autowired
     private FriendRepository friendRepository;

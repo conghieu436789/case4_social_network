@@ -4,10 +4,11 @@ import com.example.demo.model.entities.React;
 import com.example.demo.model.repositories.ReactRepository;
 import com.example.demo.model.services.interface_services.ReactService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class ReactServiceImpl implements ReactService {
     @Autowired
     private ReactRepository reactRepository;
