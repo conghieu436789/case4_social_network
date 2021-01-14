@@ -64,4 +64,10 @@ public class UserController {
         userService.delete(id);
         return "redirect:/admin/user";
     }
+
+    @GetMapping("/search/{username}")
+    @ResponseBody
+    public Optional<User> findById(@PathVariable("username")String username){
+        return userService.findByUserName(username);
+    }
 }
