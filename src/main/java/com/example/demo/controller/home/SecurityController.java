@@ -34,7 +34,7 @@ public class SecurityController {
     @GetMapping(value = {"/", "/home"})
     public String Homepage(Model model){
         model.addAttribute("user", getPrincipal());
-        return "welcome";
+        return "dung/welcome";
     }
 
     @RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)

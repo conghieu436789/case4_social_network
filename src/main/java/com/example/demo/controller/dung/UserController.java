@@ -1,5 +1,6 @@
 package com.example.demo.controller.dung;
 
+import com.example.demo.model.entities.Role;
 import com.example.demo.model.entities.User;
 import com.example.demo.model.services.interface_services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +19,23 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     private UserService userService;
+
+
+    @PostMapping("/create")
+    public String create(User user){
+        if(user.getPhoto().equals("")){
+            user.setPhoto(null);
+        }
+
+        user.setCreatedDate(Date.valueOf(LocalDate.now()));
+
+        List<Role> roles = new ArrayList<>();
+        roles.add(new Role(2,"ROLE_USER"));
+        user.setRoles(roles);
+
+        userService.save(user);
+        return "redirect:/admin/user";
+    }
 
     @GetMapping
     public String getAll(Model model){
@@ -30,7 +51,10 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    public String save(User user){
+    public String update(User user){
+        if(user.getPhoto().equals("")){
+            user.setPhoto(null);
+        }
         userService.save(user);
         return "redirect:/admin/user";
     }

@@ -43,9 +43,7 @@ function postDetails(id){
             $('#contentEdit').val(post.content);
             $('#descriptionEdit').val(post.description);
             $('#commentIdEdit').val(post.commentId);
-            $('#userIdEdit').val(post.userId);
-            $('#user_name').val(getUsername(post.userId));
-            console.log(getUsername(post.userId));
+            $('#user_name').val(post.user.getUsername());
             $('#submitEdit').prop('disabled', true);
         }
     });
@@ -62,16 +60,3 @@ function deletePost(id) {
     $('#deleteModal').modal();
 }
 
-function getUsername(id){
-    let href = "admin/user/find/"+id;
-    $.ajax({
-        type: "GET",
-        url: URL_API+href,
-        success: function (user){
-            console.log(user.username);
-
-            return user.username;
-
-        }
-    });
-}
