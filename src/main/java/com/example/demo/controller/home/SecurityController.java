@@ -31,11 +31,11 @@ public class SecurityController {
 
 
     //Cho` Anh Hieu
-//    @GetMapping(value = {"/", "/home"})
-//    public String Homepage(Model model){
-//        model.addAttribute("user", getPrincipal());
-//        return "welcome";
-//    }
+    @GetMapping(value = {"/", "/home"})
+    public String Homepage(Model model){
+        model.addAttribute("user", getPrincipal());
+        return "welcome";
+    }
 
     @RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
     public String accessDeniedPage(ModelMap model) {
