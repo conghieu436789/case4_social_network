@@ -40,7 +40,10 @@
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+    <form th:action="@{/admin/post/searchTitle}" method="GET">
+        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search" id="titleSearch" name="titleSearch">
+        <button type="submit" class="btn btn-dark">Search</button>
+    </form>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             <a class="nav-link" th:href="@{/logout}">Sign out</a>
@@ -260,7 +263,7 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-</script><script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 <script src="/js/dashboard.js"></script>

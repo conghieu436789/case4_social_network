@@ -1,13 +1,13 @@
 package com.example.demo.controller.dung;
 
 import com.example.demo.model.entities.Post;
-import com.example.demo.model.entities.User;
 import com.example.demo.model.services.interface_services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +16,7 @@ import java.util.Optional;
 public class PostController {
     @Autowired
     private PostService postService;
+
 
     @GetMapping
     public String getAll(Model model){
@@ -29,6 +30,14 @@ public class PostController {
     public Optional<Post> findById(@PathVariable("id")Integer id){
         return postService.findById(id);
     }
+
+    @GetMapping("/searchTitle")
+    public String findById(@RequestParam(value="titleSearch") String title, Model model){
+        List<Post> postList = postService.findAllByTitle(title);
+        model.addAttribute("postList", postList);
+        return "dung/post";
+    }
+
 
     @PostMapping("/update")
     public String save(Post post){
