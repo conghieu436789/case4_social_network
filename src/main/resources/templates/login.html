@@ -80,7 +80,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
-<body class="text-center">
+<body>
 <div class="container-fluid">
     <form  th:action="@{/login}" method="post" class="form-signin">
 
@@ -96,13 +96,15 @@
             <label class="sr-only" for="password">Password</label>
             <input type="password" id="password" name="password"class="form-control" placeholder="Password" required/>
             <div class="form-actions">
+                <div>
                 <button type="submit" class="btn btn-lg btn-primary btn-block">Log in</button>
+                <button type="button" class="btn btn-lg btn-primary btn-block" data-toggle="modal" data-target="#addModal" data-whatever="@mdo">Create User</button>
+                </div>
                 <p class="mt-5 mb-3 text-muted">&copy; Bac Si Hai</p>
             </div>
-
     </form>
 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" data-whatever="@mdo">Create User</button>
+
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
