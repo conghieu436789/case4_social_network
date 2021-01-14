@@ -40,9 +40,9 @@
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <form th:action="@{/admin/post/searchTitle}" method="GET">
-        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search" id="titleSearch" name="titleSearch">
-        <button type="submit" class="btn btn-dark">Search</button>
+    <form th:action="@{/admin/post/searchTitle}" method="GET" class="form-inline" >
+        <input class="form-control form-control-dark"  type="text" placeholder="Search" aria-label="Search" id="titleSearch" name="titleSearch">
+        <button type="submit" class="btn btn-light">Search</button>
     </form>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">

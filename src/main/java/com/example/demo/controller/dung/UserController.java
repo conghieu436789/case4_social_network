@@ -20,6 +20,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    private List<Role> roles;
+
 
     @PostMapping("/create")
     public String create(User user){
@@ -47,7 +49,9 @@ public class UserController {
     @GetMapping("find/{id}")
     @ResponseBody
     public Optional<User> findById(@PathVariable("id")Integer id){
+        roles = userService.findById(id).get().getRoles();
         return userService.findById(id);
+
     }
 
     @PostMapping("/update")
@@ -55,6 +59,7 @@ public class UserController {
         if(user.getPhoto().equals("")){
             user.setPhoto(null);
         }
+        user.setRoles(roles);
         userService.save(user);
         return "redirect:/admin/user";
     }
@@ -68,6 +73,7 @@ public class UserController {
     @GetMapping("/search/{username}")
     @ResponseBody
     public Optional<User> findById(@PathVariable("username")String username){
+        roles = userService.findByUserName(username).get().getRoles();
         return userService.findByUserName(username);
     }
 }
