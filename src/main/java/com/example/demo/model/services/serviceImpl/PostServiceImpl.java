@@ -31,4 +31,9 @@ public class PostServiceImpl implements PostService {
     public void delete(int id) {
         postRepository.deleteById(id);
     }
+
+    @Override
+    public List<Post> findAllByTitle(String title) {
+        return postRepository.findAllByTitle(title);
+    }
 }
