@@ -1,0 +1,115 @@
+.search{
+    border-radius: 20px;
+}
+.icon,.icon-f{
+    font-size: 40px;
+    color: greenyellow;
+}
+.icon-f {
+    color: blue;
+}
+.icon:hover {
+    color: blue;
+}
+.shadowheader{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#notification, #user {
+    position: absolute;
+    top:70px;
+    right: 0px;
+    /*border-radius: 30px;*/
+}
+.setting{
+    text-decoration: none;
+    margin-right: 5px;
+}
+.setting:hover {
+    background-color: #b1dfbb;
+}
+a:link{
+    color: blue;
+    text-decoration: none;
+}
+
+.content{
+    margin-top: 80px;
+    /*top: 80px;*/
+}
+
+body {
+    background: #eee
+}
+
+.date {
+    font-size: 11px
+}
+
+.comment-text {
+    font-size: 12px
+}
+
+.fs-12 {
+    font-size: 12px
+}
+
+.shadow-none {
+    box-shadow: none
+}
+
+.name {
+    color: #007bff
+}
+
+.cursor:hover {
+    color: blue
+}
+
+.cursor {
+    cursor: pointer
+}
+
+.textarea {
+    resize: none
+}
+.createPost{
+    border-radius: 20px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    /*display: block;*/
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    width: 100%;
+}
+.createPost:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.overflowSide{
+    overflow: auto;
+    height: calc(100vh - 6rem);
+}
+
+.comment{
+    border-radius: 20px;
+    border: 1px solid black;
+
+}
+
+.friend-frame{
+    border-radius: 10px;
+    border: 1px solid black;
+    width: 90%;
+    background-color: lightskyblue;
+}
+.friend-frame:hover {
+    background-color: lightgray;
+}
