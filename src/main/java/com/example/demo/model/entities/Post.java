@@ -20,7 +20,6 @@ public class Post {
 
     private String description;
 
-    @Column(nullable = false)
     private Integer commentId;
 
     private int userId;

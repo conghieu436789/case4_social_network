@@ -17,7 +17,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public String getAllUser(Model model){
+    public String getAll(Model model){
         List<User> userList = userService.getAll();
         model.addAttribute("userList",userList);
         return "dung/user";
