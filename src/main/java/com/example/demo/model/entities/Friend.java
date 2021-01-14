@@ -1,28 +1,38 @@
 package com.example.demo.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "friend")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Friend {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private int userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", insertable=false, updatable=false)
+    private User user;
 
-    private int friendId;
+
+    @ManyToOne
+    @JoinColumn(name = "friend_id", insertable=false, updatable=false)
+    private User friend;
+
 
     private String status;
 
     public Friend() {
     }
 
-    public Friend(Integer id, int userId, int friendId, String status) {
+    public Friend(Integer id, User user, User friend, String status) {
         this.id = id;
-        this.userId = userId;
-        this.friendId = friendId;
+        this.user = user;
+        this.friend = friend;
         this.status = status;
     }
 
@@ -34,20 +44,20 @@ public class Friend {
         this.id = id;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public int getFriendId() {
-        return friendId;
+    public User getFriend() {
+        return friend;
     }
 
-    public void setFriendId(int friendId) {
-        this.friendId = friendId;
+    public void setFriend(User friend) {
+        this.friend = friend;
     }
 
     public String getStatus() {

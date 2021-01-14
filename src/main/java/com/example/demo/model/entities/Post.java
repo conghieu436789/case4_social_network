@@ -1,9 +1,15 @@
 package com.example.demo.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
+
 @Entity
 @Table(name = "post")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,22 +26,31 @@ public class Post {
 
     private String description;
 
-    private Integer commentId;
+    @ManyToOne
+    @JoinColumn(name = "comment_id",insertable=false, updatable=false)
+    private Post comment;
 
-    private int userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", insertable=false, updatable=false)
+    private User user;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post")
+    private List<React> reacts;
+
 
     public Post() {
     }
 
-    public Post(Integer id, String title, Date createdDate, Date modifyDate, String content, String description, Integer commentId, int userId) {
+    public Post(Integer id, String title, Date createdDate, Date modifyDate, String content, String description, Post comment, User user, List<React> reacts) {
         this.id = id;
         this.title = title;
         this.createdDate = createdDate;
         this.modifyDate = modifyDate;
         this.content = content;
         this.description = description;
-        this.commentId = commentId;
-        this.userId = userId;
+        this.comment = comment;
+        this.user = user;
+        this.reacts = reacts;
     }
 
     public Integer getId() {
@@ -86,19 +101,27 @@ public class Post {
         this.description = description;
     }
 
-    public Integer getCommentId() {
-        return commentId;
+    public Post getComment() {
+        return comment;
     }
 
-    public void setCommentId(Integer commentId) {
-        this.commentId = commentId;
+    public void setComment(Post comment) {
+        this.comment = comment;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<React> getReacts() {
+        return reacts;
+    }
+
+    public void setReacts(List<React> reacts) {
+        this.reacts = reacts;
     }
 }

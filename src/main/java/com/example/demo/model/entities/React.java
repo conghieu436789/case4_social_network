@@ -1,24 +1,34 @@
 package com.example.demo.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "react")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class React {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private int userId;
-    private int postId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", insertable=false, updatable=false)
+    private User user;
+
+
+    @ManyToOne
+    @JoinColumn(name = "post_id", insertable=false, updatable=false)
+    private Post post;
 
     public React() {
     }
 
-    public React(Integer id, int userId, int postId) {
+    public React(Integer id, User user, Post post) {
         this.id = id;
-        this.userId = userId;
-        this.postId = postId;
+        this.user = user;
+        this.post = post;
     }
 
     public Integer getId() {
@@ -29,19 +39,19 @@ public class React {
         this.id = id;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public int getPostId() {
-        return postId;
+    public Post getPost() {
+        return post;
     }
 
-    public void setPostId(int postId) {
-        this.postId = postId;
+    public void setPost(Post post) {
+        this.post = post;
     }
 }

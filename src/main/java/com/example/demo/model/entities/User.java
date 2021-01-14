@@ -1,6 +1,10 @@
 package com.example.demo.model.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -9,6 +13,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "user")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,17 +42,41 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles = new ArrayList<>();
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Post> posts;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id")
+    private List<User> friends;
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj){
+            return true;
+        }
+        if(obj == null || getClass() != obj.getClass()){
+            return false;
+        }
+        User user = (User) obj;
+        return id.equals(user.id);
+    }
 
     public User() {
     }
 
-    public User(Integer id, String username,
-                String password, String fullName,
-                Date dateOfBirth, String gender,
-                String photo, String phone,
-                String mail, String address,
-                String status, Date createdDate) {
+    public User(Integer id, String username, String password, String fullName, Date dateOfBirth, String gender, String photo, String phone, String mail, String address, String status, Date createdDate, List<Role> roles, List<Post> posts, List<User> friends) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -60,6 +89,9 @@ public class User {
         this.address = address;
         this.status = status;
         this.createdDate = createdDate;
+        this.roles = roles;
+        this.posts = posts;
+        this.friends = friends;
     }
 
     public Integer getId() {
@@ -158,28 +190,20 @@ public class User {
         this.createdDate = createdDate;
     }
 
-    public List<Role> getRoles() {
-        return roles;
+    public List<Post> getPosts() {
+        return posts;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
+
+    public List<User> getFriends() {
+        return friends;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if(this == obj){
-            return true;
-        }
-        if(obj == null || getClass() != obj.getClass()){
-            return false;
-        }
-        User user = (User) obj;
-        return id.equals(user.id);
+    public void setFriends(List<User> friends) {
+        this.friends = friends;
     }
 }

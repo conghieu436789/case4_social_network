@@ -18,8 +18,16 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     runtimeOnly 'mysql:mysql-connector-java'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    compile group: 'org.springframework.security', name: 'spring-security-web', version: '4.2.3.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-config', version: '4.2.3.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-taglibs', version: '4.2.3.RELEASE'
+    compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '3.0.2.RELEASE'
+    // https://mvnrepository.com/artifact/org.springframework.security/spring-security-core
+    compile group: 'org.springframework.security', name: 'spring-security-core', version: '4.2.3.RELEASE'
+    compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+    // https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator
+    compile group: 'org.hibernate.validator', name: 'hibernate-validator', version: '6.0.18.Final'
 }
-
 test {
     useJUnitPlatform()
 }
