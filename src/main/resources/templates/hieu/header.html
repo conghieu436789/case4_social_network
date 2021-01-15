@@ -24,7 +24,7 @@
 <body>
 <div  th:fragment="header">
     <div class="navbar navbar-expand-sm navbar-light bg-light fixed-top shadowheader">
-        <a class="navbar-brand" href="#"><i class="fa fa-facebook-official icon-f" aria-hidden="true"></i></a>
+        <a class="navbar-brand" href="/dangchothemsau"><i class="fa fa-facebook-official icon-f" aria-hidden="true"></i></a>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2 search" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -36,35 +36,28 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto ml-5">
                 <li class="nav-item active ml-5">
-                    <a class="nav-link" href="#"><i class="fa fa-home icon" aria-hidden="true"></i><span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/dangchothemsau"><i class="fa fa-home icon" aria-hidden="true"></i><span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active ml-5">
-                    <a class="nav-link" href="#"><i class="fa fa-user-plus icon" aria-hidden="true"></i><span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/dangchothemsau"><i class="fa fa-user-plus icon" aria-hidden="true"></i><span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active ml-5">
-                    <a class="nav-link" href="#"><i class="fa fa-play icon" aria-hidden="true"></i><span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/dangchothemsau"><i class="fa fa-play icon" aria-hidden="true"></i><span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active ml-5">
-                    <a class="nav-link" href="#"><i class="fa fa-users icon" aria-hidden="true"></i><span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/dangchothemsau"><i class="fa fa-users icon" aria-hidden="true"></i><span class="sr-only">(current)</span></a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active ml-3 mt-2">
-                    <a class="nav-link" href="#">
-                        <img th:src="@{/img/avatar.jpg}" height="30" width="30"/>
-                        <span>Account</span>
+                    <a class="nav-link" href="/dangchothemsau">
+                        <p th:text="'Hello  '+${user}" height="30" width="30"/>
                     </a>
                 </li>
+
                 <li class="nav-item active ml-3">
-                    <a class="nav-link" data-toggle="collapse" href="#notification" th:href="@{#notification}" role="button"
-                       aria-expanded="false" aria-controls="notification">
-                        <i class="fa fa-bell-o icon" aria-hidden="true"></i>
-                    </a>
-                </li>
-                <li class="nav-item active ml-3">
-                    <a class="nav-link" data-toggle="collapse" href="#user" th:href="@{#user}" role="button"
-                       aria-expanded="false" aria-controls="notification">
-                        <i class="fa fa-user-circle icon" aria-hidden="true"></i>
+                    <a href="/logout" class="btn btn-danger">
+                        Logout
                     </a>
                 </li>
             </ul>
@@ -79,7 +72,7 @@
             <h1 class="card-title">Notifications</h1>
             <div class="w-100">
                 <p>
-                    <a href="#">
+                    <a href="/dangchothemsau">
                         <span>
                             <img src="../static/img/avatar.jpg" alt="loading" height="30" width="30"/>
                         </span>
@@ -87,13 +80,13 @@
                     </a>
                 </p>
                 <p>
-                    <a href="#">
+                    <a href="/dangchothemsau">
                         <img src="../static/img/avatar.jpg" alt="loading" height="30" width="30"/>
                         <span class="card-text">Noi dung thong bao</span>
                     </a>
                 </p>
                 <p>
-                    <a href="#">
+                    <a href="/dangchothemsau">
                         <img src="../static/img/avatar.jpg" alt="loading" height="30" width="30"/>
                         <span class="card-text">Noi dung thong bao</span>
                     </a>
@@ -104,22 +97,22 @@
 
     <div class="w-25 collapse" id="user">
         <div class="card card-body">
-            <a href="#" class="d-block">
+            <a href="/dangchothemsau" class="d-block">
                 <img src="../static/img/avatar.jpg" alt="loading" height="30" width="30"/>
                 <span class="card-text">
                    UserName
                 </span>
             </a>
             <hr>
-            <a href="#" class="setting">
+            <a href="/dangchothemsau" class="setting">
                 <i class="fa fa-cog" aria-hidden="true"></i>
                 <span>Settings </span>
             </a>
-            <a href="#" class="setting">
+            <a href="/dangchothemsau" class="setting">
                 <i class="fa fa-question-circle" aria-hidden="true"></i>
                 <span>Helps </span>
             </a>
-            <a href="#" class="setting">
+            <a href="/dangchothemsau" class="setting">
                 <i class="fa fa-sign-out" aria-hidden="true"></i>
                 <span>Sign-out </span>
             </a>
