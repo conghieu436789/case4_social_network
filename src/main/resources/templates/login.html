@@ -118,23 +118,23 @@
 
                         <div class="form-group">
                             <label  class="col-form-label">Username:</label>
-                            <input type="text" class="form-control"  name="username" >
+                            <input type="text" class="form-control"  name="username" required>
                         </div>
 
                         <div class="form-group">
                             <label  class="col-form-label">Password:</label>
-                            <input type="password" class="form-control"  name="password" >
+                            <input type="password" class="form-control"  name="password" required>
                         </div>
 
                         <div class="form-group">
                             <label  class="col-form-label">Full Name:</label>
-                            <input type="text" class="form-control"  name="fullName">
+                            <input type="text" class="form-control"  name="fullName" required>
                         </div>
 
 
                         <div class="form-group">
                             <label  class="col-form-label">Birth Day:</label>
-                            <input type="date" class="form-control"  name="dateOfBirth">
+                            <input type="date" class="form-control"  name="dateOfBirth" required>
                         </div>
 
                         <div class="form-group">
@@ -151,25 +151,25 @@
 
                         <div class="form-group">
                             <label  class="col-form-label">Phone:</label>
-                            <input type="text" class="form-control"  name="phone">
+                            <input type="text" class="form-control"  name="phone" required>
                         </div>
 
                         <div class="form-group">
                             <label  class="col-form-label">Mail:</label>
-                            <input type="text" class="form-control"  name="mail">
+                            <input type="text" class="form-control"  name="mail" required>
                         </div>
 
                         <div class="form-group">
                             <label  class="col-form-label">Address:</label>
-                            <input type="text" class="form-control"  name="address">
+                            <input type="text" class="form-control"  name="address"required>
                         </div>
                         <div class="form-group">
                             <label  class="col-form-label">Status:</label>
-                            <input type="text" class="form-control"  name="status">
+                            <input type="text" class="form-control"  name="status" required >
                         </div>
 
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">SUBMIT</button>&nbsp;&nbsp;&nbsp;
+                            <button type="submit" class="btn btn-primary" onclick="alert('Create User Success !\n Please login with username and password ')">SUBMIT</button>&nbsp;&nbsp;&nbsp;
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </form>
@@ -181,7 +181,7 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-</script><script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 <script src="/js/dashboard.js"></script>
