@@ -1,5 +1,6 @@
 package com.example.demo.controller.home;
 
+import com.example.demo.model.entities.User;
 import com.example.demo.model.services.interface_services.PostService;
 import com.example.demo.model.services.interface_services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +43,11 @@ public class SecurityController {
     //Cho` Anh Hieu
     @GetMapping(value = {"/", "/home"})
     public String Homepage(Model model){
+        User user = userService.findByUserName(getPrincipal()).get();
         model.addAttribute("userList",userService.getAll());
         model.addAttribute("user", getPrincipal());
         model.addAttribute("posts",postService.getAll());
+        model.addAttribute("nguoidung",user);
         return "hieu/home";
     }
 

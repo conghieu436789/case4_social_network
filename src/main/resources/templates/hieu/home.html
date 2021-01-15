@@ -16,11 +16,17 @@
                 <li class="list-group-item">
                     <div class="d-flex flex-row user-info">
                         <a href="/dangchothemsau">
-                            <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                            <div class="img-container" th:if="${nguoidung.photo}">
+                                <img class="rounded-circle" th:src="${nguoidung.photo}" width="70">
+                            </div>
+
+                            <div class="img-container" th:unless="${nguoidung.photo}">
+                                <img src="/img/anonymous-user.png" height="70"/>
+                            </div>
                         </a>
                         <div class="d-flex flex-column justify-content-start ml-2 mt-2">
                             <a href="/dangchothemsau">
-                                <span class="d-block font-weight-bold name">Marry Andrews</span>
+                                <span class="d-block font-weight-bold name" th:text="${nguoidung.fullName}"></span>
                             </a>
                         </div>
                     </div>
@@ -81,7 +87,13 @@
             <div class="d-flex justify-content-center row">
                 <div class="col-md-10">
                     <a href="/dangchothemsau">
-                        <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                        <div class="img-container" th:if="${nguoidung.photo}">
+                            <img class="rounded-circle" th:src="${nguoidung.photo}" width="70">
+                        </div>
+
+                        <div class="img-container" th:unless="${nguoidung.photo}">
+                            <img src="/img/anonymous-user.png" height="70"/>
+                        </div>
                     </a>
                     <span>
                             <input class="createPost w-50" type="text" data-toggle="modal" data-target="#createPost"
@@ -150,7 +162,7 @@
                             <div class="d-flex flex-row user-info">
                                 <a href="/dangchothemsau">
                                     <div class="img-container" th:if="${post.user.photo}">
-                                        <img class="rounded-circle" th:src="${post.user.photo}" width="40">
+                                        <img class="rounded-circle" th:src="${post.user.photo}" width="70">
                                     </div>
 
                                     <div class="img-container" th:unless="${post.user.photo}">
@@ -191,46 +203,6 @@
                             </div>
                         </div>
 
-                        <!--                        <div class="bg-light p-2">-->
-                        <!--                            <div class="d-flex flex-row user-info">-->
-                        <!--                                <a href="/dangchothemsau">-->
-                        <!--                                    <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">-->
-                        <!--                                </a>-->
-                        <!--                                <div class="d-flex flex-column justify-content-start ml-2">-->
-                        <!--                                    <a href="/dangchothemsau">-->
-                        <!--                                        <span class="d-block font-weight-bold name">Marry Andrews</span>-->
-                        <!--                                    </a>-->
-                        <!--                                    <span class="date text-black-50 createPost">Day la commentasdfghjkkhmgfdsadfgdffghfds asshgjgbfdsdfmghfdsdgfncbvdsgfbvds</span>-->
-
-                        <!--                                    <div class="d-flex flex-row fs-12">-->
-                        <!--                                        <div class="like p-2 cursor">-->
-                        <!--                                            <a href="/dangchothemsau">-->
-                        <!--                                                <i class="fa fa-thumbs-o-up"></i><span class="ml-1">Like</span>-->
-                        <!--                                            </a>-->
-                        <!--                                        </div>-->
-                        <!--                                        <div class="like p-2 curs   or">-->
-                        <!--                                            <a href="/dangchothemsau">-->
-                        <!--                                                <i class="fa fa-commenting-o"></i>-->
-                        <!--                                                <span class="ml-1">Repply</span>-->
-                        <!--                                            </a>-->
-                        <!--                                        </div>-->
-                        <!--                                        <div class="like p-2 cursor">-->
-                        <!--                                            <a href="/dangchothemsau">-->
-                        <!--                                                <i class="fa fa-share"></i>-->
-                        <!--                                                <span class="ml-1">Share</span>-->
-                        <!--                                            </a>-->
-                        <!--                                        </div>-->
-                        <!--                                    </div>-->
-                        <!--                                </div>-->
-                        <!--                            </div>-->
-                        <!--                        </div>-->
-
-                        <!--                        <div class="bg-light p-2">-->
-                        <!--                            <input type="hidden" value="2" id="userComment">-->
-                        <!--                            <input type="hidden" value="3" id="postID">-->
-                        <!--                            <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40"><textarea class="form-control ml-1 shadow-none textarea" id="commentArea"></textarea></div>-->
-                        <!--                            <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none" type="button" id="postComment">Post comment</button><button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button></div>-->
-                        <!--                        </div>-->
                         <hr>
                     </div>
 
