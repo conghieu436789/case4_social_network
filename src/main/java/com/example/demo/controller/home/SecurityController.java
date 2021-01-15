@@ -1,6 +1,7 @@
 package com.example.demo.controller.home;
 
 import com.example.demo.model.services.interface_services.PostService;
+import com.example.demo.model.services.interface_services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +17,9 @@ public class SecurityController {
 
     @Autowired
     private PostService postService;
+
+    @Autowired
+    private UserService userService;
 
     private String getPrincipal(){
         String userName = null;
@@ -38,7 +42,7 @@ public class SecurityController {
     //Cho` Anh Hieu
     @GetMapping(value = {"/", "/home"})
     public String Homepage(Model model){
-
+        model.addAttribute("userList",userService.getAll());
         model.addAttribute("user", getPrincipal());
         model.addAttribute("posts",postService.getAll());
         return "hieu/home";
