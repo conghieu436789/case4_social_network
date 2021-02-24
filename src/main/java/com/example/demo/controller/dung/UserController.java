@@ -2,6 +2,7 @@ package com.example.demo.controller.dung;
 
 import com.example.demo.model.entities.Role;
 import com.example.demo.model.entities.User;
+import com.example.demo.model.services.interface_services.PostService;
 import com.example.demo.model.services.interface_services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,9 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PostService postService;
 
     private List<Role> roles;
 
@@ -66,6 +70,7 @@ public class UserController {
 
     @GetMapping("delete/{id}")
     public String delete(@PathVariable("id")Integer id){
+        postService.deleteAllPostByUID(id);
         userService.delete(id);
         return "redirect:/admin/user";
     }

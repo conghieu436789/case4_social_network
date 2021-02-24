@@ -4,4 +4,5 @@ import com.example.demo.model.entities.Post;
 
 
 public interface PostService extends CommonService<Post>{
+    void deleteAllPostByUID(int id);
 }
