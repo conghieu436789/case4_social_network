@@ -1,6 +1,8 @@
 package com.example.demo.controller.home;
 
+import com.example.demo.model.entities.Friend;
 import com.example.demo.model.entities.User;
+import com.example.demo.model.services.interface_services.FriendService;
 import com.example.demo.model.services.interface_services.PostService;
 import com.example.demo.model.services.interface_services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 @Controller
 public class SecurityController {
 
@@ -21,6 +27,9 @@ public class SecurityController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private FriendService friendService;
 
     private String getPrincipal(){
         String userName = null;
@@ -44,7 +53,15 @@ public class SecurityController {
     @GetMapping(value = {"/", "/home"})
     public String Homepage(Model model){
         User user = userService.findByUserName(getPrincipal()).get();
-        model.addAttribute("userList",userService.getAll());
+//        model.addAttribute("userList",userService.getAll());
+        List<User> friendList = new ArrayList<>();
+        List<Friend> listFriendId = friendService.findAllFriend(user.getId());
+        for (Friend f: listFriendId) {
+           User friend = userService.findById(f.getUser_sender_id()).get();
+           friendList.add(friend);
+        }
+
+        model.addAttribute("friendList",friendList);
         model.addAttribute("user", getPrincipal());
         model.addAttribute("posts",postService.getAll());
         model.addAttribute("nguoidung",user);
@@ -57,5 +74,7 @@ public class SecurityController {
         model.addAttribute("user", getPrincipal());
         return "accessDenied";
     }
+
+
 
 }
