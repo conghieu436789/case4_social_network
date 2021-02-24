@@ -75,13 +75,13 @@ INSERT INTO `post` VALUES (1,'test','2021-01-12','bacsihai test content','2021-0
 UNLOCK TABLES;
 
 --
--- Table structure for table `react`
+-- Table structure for table `emote`
 --
 
-DROP TABLE IF EXISTS `react`;
+DROP TABLE IF EXISTS `emote`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `react` (
+CREATE TABLE `emote` (
   `id` int NOT NULL AUTO_INCREMENT,
   `post_id` int DEFAULT NULL,
   `user_id` int DEFAULT NULL,
@@ -92,12 +92,12 @@ CREATE TABLE `react` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `react`
+-- Dumping data for table `emote`
 --
 
-LOCK TABLES `react` WRITE;
-/*!40000 ALTER TABLE `react` DISABLE KEYS */;
-/*!40000 ALTER TABLE `react` ENABLE KEYS */;
+LOCK TABLES `emote` WRITE;
+/*!40000 ALTER TABLE `emote` DISABLE KEYS */;
+/*!40000 ALTER TABLE `emote` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --

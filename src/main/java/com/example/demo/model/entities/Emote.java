@@ -5,10 +5,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Data
@@ -17,13 +13,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Post {
+public class Emote {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @Column(columnDefinition = "TEXT")
-    private String content;
 
     @ManyToOne
     @JoinColumn(name = "user_id",insertable = false,updatable = false)
@@ -31,15 +24,16 @@ public class Post {
 
     private Integer user_id;
 
-    private Timestamp createdDate;
+    @ManyToOne
+    @JoinColumn(name = "post_id",insertable = false,updatable = false)
+    private Post post;
 
-    private Timestamp modifiedAt;
+    private Integer post_id;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
-    private List<Comment> commentList = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "comment_id",insertable = false,updatable = false)
+    private Comment comment;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
-    private List<Emote> emoteList = new ArrayList<>();
-
+    private Integer comment_id;
 
 }

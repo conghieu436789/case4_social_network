@@ -31,12 +31,12 @@ public class PostController {
         return postService.findById(id);
     }
 
-    @GetMapping("/searchTitle")
-    public String findById(@RequestParam(value="titleSearch") String title, Model model){
-        List<Post> postList = postService.findAllByTitle(title);
-        model.addAttribute("postList", postList);
-        return "dung/post";
-    }
+//    @GetMapping("/searchTitle")
+//    public String findById(@RequestParam(value="titleSearch") String title, Model model){
+//        List<Post> postList = postService.findAllByTitle(title);
+//        model.addAttribute("postList", postList);
+//        return "dung/post";
+//    }
 
 
     @PostMapping("/update")
