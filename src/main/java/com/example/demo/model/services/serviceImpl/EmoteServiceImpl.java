@@ -31,4 +31,15 @@ public class EmoteServiceImpl implements EmoteService {
     public void delete(int id) {
         emoteRepository.deleteById(id);
     }
+
+
+    @Override
+    public void disLikePost(int user_id, int post_id) {
+        emoteRepository.disLikePost(user_id,post_id);
+    }
+
+    @Override
+    public void disLikeComment(int id, int comment_id) {
+        emoteRepository.disLikeComment(id,comment_id);
+    }
 }

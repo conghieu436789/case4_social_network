@@ -45,4 +45,7 @@ public class Comment {
     private Integer comment_id;
 
     private Timestamp createdDate;
+
+    @Transient
+    private boolean isLike;
 }

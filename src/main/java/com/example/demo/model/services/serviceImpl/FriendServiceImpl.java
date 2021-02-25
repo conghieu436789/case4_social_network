@@ -1,6 +1,7 @@
 package com.example.demo.model.services.serviceImpl;
 
 import com.example.demo.model.entities.Friend;
+import com.example.demo.model.entities.IFriend;
 import com.example.demo.model.repositories.FriendRepository;
 import com.example.demo.model.services.interface_services.FriendService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,10 @@ public class FriendServiceImpl implements FriendService {
     @Override
     public void delete(int id) {
         friendRepository.deleteById(id);
+    }
+
+    @Override
+    public List<IFriend> getListFriend(Integer id) {
+        return friendRepository.getListFriend(id);
     }
 }

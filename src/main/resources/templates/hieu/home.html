@@ -101,7 +101,7 @@
                         <!--                            <a id="createPostForm" class="btn btn-primary">Create post</a>-->
                     </span>
 
-                    <!-- Modal -->
+                    <!-- Modal create -->
                     <div class="modal fade" id="createPost" tabindex="-1" role="dialog"
                          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="dialog">
@@ -118,19 +118,24 @@
 
                                         <div class="d-flex flex-row user-info">
                                             <a href="/dangchothemsau" class="mt-3">
-                                                <img class="img-thumbnail" src="https://i.imgur.com/RpzrMR2.jpg"
-                                                     width="40">
+                                                <div class="img-container" th:if="${nguoidung.photo}">
+                                                    <img class="img-thumbnail" th:src="${nguoidung.photo}" width="70">
+                                                </div>
+
+                                                <div class="img-container" th:unless="${nguoidung.photo}">
+                                                    <img class="img-thumbnail" src="/img/anonymous-user.png" width="70"/>
+                                                </div>
                                             </a>
                                             <div class="d-flex flex-column justify-content-start ml-2">
                                                 <a href="/dangchothemsau">
-                                                    <input type="hidden" id="user_id" value="1">
+                                                    <input type="hidden" th:value="${nguoidung.id}" name="user_id">
                                                     <span class="d-block font-weight-bold name">User</span>
                                                 </a>
-                                                <select class="form-control" name="description">
-                                                    <option value="Public">Public</option>
-                                                    <option value="Private">Private</option>
-                                                    <option value="Friend">Friend</option>
-                                                </select>
+<!--                                                <select class="form-control" name="description">-->
+<!--                                                    <option value="Public">Public</option>-->
+<!--                                                    <option value="Private">Private</option>-->
+<!--                                                    <option value="Friend">Friend</option>-->
+<!--                                                </select>-->
                                             </div>
                                         </div>
 
@@ -157,6 +162,8 @@
                     <hr>
 
                     <!--                    post-->
+
+
                     <div class="d-flex flex-column comment-section" th:each="post:${posts}">
                         <div class="bg-white p-2">
                             <div class="d-flex flex-row user-info">
@@ -171,7 +178,7 @@
                                 </a>
                                 <div class="d-flex flex-column justify-content-start ml-2">
                                     <a href="/dangchothemsau">
-                                        <span class="d-block font-weight-bold name" th:text="${post.user.fullName}">Marry Andrews</span>
+                                        <span class="d-block font-weight-bold name" th:text="${post.user.fullName}"></span>
                                     </a>
                                     <span class="date text-black-50" th:text="${post.createdDate}">Shared publicly - Jan 2020</span>
                                 </div>
@@ -182,10 +189,22 @@
                         </div>
                         <div class="bg-white">
                             <div class="d-flex flex-row fs-12">
-                                <div class="like p-2 cursor">
-                                    <a href="/dangchothemsau">
-                                        <i class="fa fa-thumbs-o-up"></i><span class="ml-1">Like</span>
-                                    </a>
+                                <div class="like p-2 cursor" >
+                                    <form th:action="@{/like}" method="post" th:id="${post.id}" th:unless="${post.like}">
+                                        <input type="hidden" th:value="${post.id}" name="post_id">
+                                        <input type="hidden" th:value="${nguoidung.id}" name="user_id">
+                                    <button  type="submit">
+                                        <i class="fa fa-thumbs-o-up"></i><span class="ml-1" >Like</span>
+                                    </button>
+                                    </form>
+
+                                    <form th:action="@{/dislikePost}" method="post" th:id="${post.id}" th:if="${post.like}">
+                                        <input type="hidden" th:value="${post.id}" name="post_id">
+                                        <input type="hidden" th:value="${nguoidung.id}" name="user_id">
+                                        <button  type="submit" class="btn-danger">
+                                            <i class="fa fa-thumbs-o-up"></i><span class="ml-1" >Like</span>
+                                        </button>
+                                    </form>
                                 </div>
                                 <div class="like p-2 cursor">
                                     <a href="/dangchothemsau">
@@ -202,7 +221,77 @@
                                 </div>
                             </div>
                         </div>
+<!--                        commentList-->
+                        <div class="bg-light p-2" th:each="comment:${post.commentList}">
+                            <div class="d-flex flex-row user-info">
+                                <a href="/dangchothemsau">
+                                    <div class="img-container" th:if="${comment.user.photo}">
+                                        <img class="img-thumbnail" th:src="${comment.user.photo}" width="70">
+                                    </div>
 
+                                    <div class="img-container" th:unless="${comment.user.photo}">
+                                        <img class="img-thumbnail" src="/img/anonymous-user.png" width="70"/>
+                                    </div>
+                                </a>
+                                <div class="d-flex flex-column justify-content-start ml-2">
+                                    <a href="#">
+                                        <span class="d-block font-weight-bold name" th:text="${comment.user.username}">Marry Andrews</span>
+                                    </a>
+                                    <span class="date text-black-50 createPost" th:text="${comment.content}">Day la commentasdfghjkkhmgfdsadfgdffghfds asshgjgbfdsdfmghfdsdgfncbvdsgfbvds</span>
+
+                                    <div class="d-flex flex-row fs-12">
+                                        <div class="like p-2 cursor">
+                                            <form th:action="@{/like}" method="post" th:unless="${comment.like}">
+                                                <input type="hidden" th:value="${comment.id}" name="comment_id">
+                                                <input type="hidden" th:value="${nguoidung.id}" name="user_id">
+                                                <button  type="submit">
+                                                    <i class="fa fa-thumbs-o-up"></i><span class="ml-1">Like</span>
+                                                </button>
+                                            </form>
+
+                                            <form th:action="@{/dislikeComment}" method="post" th:id="${post.id}" th:if="${comment.like}">
+                                                <input type="hidden" th:value="${comment.id}" name="post_id">
+                                                <input type="hidden" th:value="${nguoidung.id}" name="user_id">
+                                                <button  type="submit" class="btn-danger">
+                                                    <i class="fa fa-thumbs-o-up"></i><span class="ml-1" >Like</span>
+                                                </button>
+                                            </form>
+                                        </div>
+                                        <div class="like p-2 curs   or">
+                                            <a href="#">
+                                                <i class="fa fa-commenting-o"></i>
+                                                <span class="ml-1">Repply</span>
+                                            </a>
+                                        </div>
+                                        <div class="like p-2 cursor">
+                                            <a href="#">
+                                                <i class="fa fa-share"></i>
+                                                <span class="ml-1">Share</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<!                          --createComment-->
+                        <form th:action="@{/createComment}" method="post">
+                        <div class="bg-light p-2">
+                            <input type="hidden"  th:value="${nguoidung.id}" name="user_id">
+                            <input type="hidden"  th:value="${post.id}" name="post_id">
+                            <div class="d-flex flex-row align-items-start">
+                                <a href="/dangchothemsau">
+                                    <div class="img-container" th:if="${nguoidung.photo}">
+                                        <img class="img-thumbnail" th:src="${nguoidung.photo}" width="70">
+                                    </div>
+
+                                    <div class="img-container" th:unless="${nguoidung.photo}">
+                                        <img class="img-thumbnail" src="/img/anonymous-user.png" width="70"/>
+                                    </div>
+                                </a>
+                                <textarea class="form-control ml-1 shadow-none textarea" id="commentArea" name="content"></textarea></div>
+                            <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none" type="submit" id="postComment">Post comment</button><button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="reset">Cancel</button></div>
+                        </div>
+                        </form>
                         <hr>
                     </div>
 
@@ -246,80 +335,108 @@
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        tinymce.init({
-            selector: '#postContent',  // change this value according to your HTML
-            plugins: [
-                'advlist autolink lists link image charmap print preview anchor',
-                'searchreplace visualblocks code fullscreen',
-                'insertdatetime media table paste code help wordcount'
-            ],
-            toolbar: 'undo redo | formatselect | ' +
-                'bold italic backcolor | alignleft aligncenter ' +
-                'alignright alignjustify | bullist numlist outdent indent | ' +
-                'removeformat | image |help',
-            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
-            menubar: 'insert',
 
-            video_template_callback: function (data) {
-                return '<video width="' + data.width + '" height="' + data.height + '"' + (data.poster ? ' poster="' + data.poster + '"' : '') + ' controls="controls">\n' + '<source src="' + data.source + '"' + (data.sourcemime ? ' type="' + data.sourcemime + '"' : '') + ' />\n' + (data.altsource ? '<source src="' + data.altsource + '"' + (data.altsourcemime ? ' type="' + data.altsourcemime + '"' : '') + ' />\n' : '') + '</video>';
+    function likePostAction(post_id){
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: "POST",
+            cache: false,
+            data: JSON.stringify(json),
+            url: "/post/create",
+            success: function (posts) {
+
+                // location.reload();
+                console.log(posts[0].user.id);
             }
         });
-
-
-        $('#createPostForm').submit(function (event) {
+        $(`#${post_id}`).submit(function (event) {
             var user_id = $('#user_id').val();
             var content = $('#postContent').val();
             var content1 = document.getElementById("postContent").value;
             console.log(content1);
             var json = {"user": {"id": user_id}, "content": content};
-            $.ajax({
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                type: "POST",
-                cache: false,
-                data: JSON.stringify(json),
-                url: "/post/create",
-                success: function (posts) {
 
-                    // location.reload();
-                    console.log(posts[0].user.id);
-                }
-            });
             event.preventDefault();
         });
-
-        $('#postComment').click(function (event) {
-            var user_id = $('#userComment').val();
-            var comment = $('#commentArea').val();
-            var post_id = $('#postID').val();
-            // var comment1 = document.getElementById("commentArea").value;
-            console.log(comment);
-            var json = {"user": {"id": user_id}, "comment": comment, "post": {"id": post_id}};
-            $.ajax({
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                type: "POST",
-                cache: false,
-                data: JSON.stringify(json),
-                url: "/comment/create",
-                success: function (comments) {
-                    // location.reload();
-                    console.log(comments[0].user.id);
-                    console.log(comments[0].post.id);
-                }
-            });
-            event.preventDefault();
-        });
-    });
-
-    function getALLPost() {
-
     }
+
+
+
+    // $(document).ready(function () {
+    //     tinymce.init({
+    //         selector: '#postContent',  // change this value according to your HTML
+    //         plugins: [
+    //             'advlist autolink lists link image charmap print preview anchor',
+    //             'searchreplace visualblocks code fullscreen',
+    //             'insertdatetime media table paste code help wordcount'
+    //         ],
+    //         toolbar: 'undo redo | formatselect | ' +
+    //             'bold italic backcolor | alignleft aligncenter ' +
+    //             'alignright alignjustify | bullist numlist outdent indent | ' +
+    //             'removeformat | image |help',
+    //         content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+    //         menubar: 'insert',
+    //
+    //         video_template_callback: function (data) {
+    //             return '<video width="' + data.width + '" height="' + data.height + '"' + (data.poster ? ' poster="' + data.poster + '"' : '') + ' controls="controls">\n' + '<source src="' + data.source + '"' + (data.sourcemime ? ' type="' + data.sourcemime + '"' : '') + ' />\n' + (data.altsource ? '<source src="' + data.altsource + '"' + (data.altsourcemime ? ' type="' + data.altsourcemime + '"' : '') + ' />\n' : '') + '</video>';
+    //         }
+    //     });
+    //
+    //
+    //     // $('#createPostForm').submit(function (event) {
+    //     //     var user_id = $('#user_id').val();
+    //     //     var content = $('#postContent').val();
+    //     //     var content1 = document.getElementById("postContent").value;
+    //     //     console.log(content1);
+    //     //     var json = {"user": {"id": user_id}, "content": content};
+    //     //     $.ajax({
+    //     //         headers: {
+    //     //             'Accept': 'application/json',
+    //     //             'Content-Type': 'application/json'
+    //     //         },
+    //     //         type: "POST",
+    //     //         cache: false,
+    //     //         data: JSON.stringify(json),
+    //     //         url: "/post/create",
+    //     //         success: function (posts) {
+    //     //
+    //     //             // location.reload();
+    //     //             console.log(posts[0].user.id);
+    //     //         }
+    //     //     });
+    //     //     event.preventDefault();
+    //     // });
+    //
+    //     // $('#postComment').click(function (event) {
+    //     //     var user_id = $('#userComment').val();
+    //     //     var comment = $('#commentArea').val();
+    //     //     var post_id = $('#postID').val();
+    //     //     // var comment1 = document.getElementById("commentArea").value;
+    //     //     console.log(comment);
+    //     //     var json = {"user": {"id": user_id}, "comment": comment, "post": {"id": post_id}};
+    //     //     $.ajax({
+    //     //         headers: {
+    //     //             'Accept': 'application/json',
+    //     //             'Content-Type': 'application/json'
+    //     //         },
+    //     //         type: "POST",
+    //     //         cache: false,
+    //     //         data: JSON.stringify(json),
+    //     //         url: "/comment/create",
+    //     //         success: function (comments) {
+    //     //             // location.reload();
+    //     //             console.log(comments[0].user.id);
+    //     //             console.log(comments[0].post.id);
+    //     //         }
+    //     //     });
+    //     //     event.preventDefault();
+    //     // });
+    // });
+
+
 </script>
 
 </body>

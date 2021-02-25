@@ -3,6 +3,7 @@ package com.example.demo.model.entities;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -41,5 +42,6 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Emote> emoteList = new ArrayList<>();
 
-
+    @Transient
+    private boolean like;
 }
